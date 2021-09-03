@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Objects for Type Hinting &#8212; Python 3.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within Python 3.9.7 documentation"
+          href="../_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Initialization, Finalization, and Threads" href="init.html" />
+    <link rel="prev" title="DateTime Objects" href="datetime.html" />
+    <link rel="canonical" href="https://docs.python.org/3/c-api/typehints.html" />
+    
+      
+      
+    
+
+    
+    <style>
+      @media only screen {
+        table.full-width-table {
+            width: 100%;
+        }
+      }
+    </style>
+
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+     
+
+
+  </head><body>
+  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="init.html" title="Initialization, Finalization, and Threads"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="datetime.html" title="DateTime Objects"
+             accesskey="P">previous</a> |</li>
+
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+
+    <li>
+      <a href="../index.html">3.9.7 Documentation</a> &#187;
+    </li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="concrete.html" accesskey="U">Concrete Objects Layer</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="objects-for-type-hinting">
+<span id="typehintobjects"></span><h1>Objects for Type Hinting<a class="headerlink" href="#objects-for-type-hinting" title="Permalink to this headline">¶</a></h1>
+<p>Various built-in types for type hinting are provided.
+Only <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> is exposed to C.</p>
+<dl class="function">
+<dt id="c.Py_GenericAlias">
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a>* <code class="sig-name descname">Py_GenericAlias</code><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *origin</em>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject">PyObject</a><em> *args</em><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_GenericAlias" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> object.
+Equivalent to calling the Python class
+<a class="reference internal" href="../library/types.html#types.GenericAlias" title="types.GenericAlias"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.GenericAlias</span></code></a>.  The <em>origin</em> and <em>args</em> arguments set the
+<code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code>’s <code class="docutils literal notranslate"><span class="pre">__origin__</span></code> and <code class="docutils literal notranslate"><span class="pre">__args__</span></code> attributes respectively.
+<em>origin</em> should be a <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTypeObject*</span></code></a>, and <em>args</em> can be a
+<a class="reference internal" href="tuple.html#c.PyTupleObject" title="PyTupleObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTupleObject*</span></code></a> or any <code class="docutils literal notranslate"><span class="pre">PyObject*</span></code>.  If <em>args</em> passed is
+not a tuple, a 1-tuple is automatically constructed and <code class="docutils literal notranslate"><span class="pre">__args__</span></code> is set
+to <code class="docutils literal notranslate"><span class="pre">(args,)</span></code>.
+Minimal checking is done for the arguments, so the function will succeed even
+if <em>origin</em> is not a type.
+The <code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code>’s <code class="docutils literal notranslate"><span class="pre">__parameters__</span></code> attribute is constructed lazily
+from <code class="docutils literal notranslate"><span class="pre">__args__</span></code>.  On failure, an exception is raised and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is
+returned.</p>
+<p>Here’s an example of how to make an extension type generic:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="k">static</span> <span class="n">PyMethodDef</span> <span class="n">my_obj_methods</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// Other methods.</span>
+    <span class="p">...</span>
+    <span class="p">{</span><span class="s">&quot;__class_getitem__&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">PyCFunction</span><span class="p">)</span><span class="n">Py_GenericAlias</span><span class="p">,</span> <span class="n">METH_O</span><span class="o">|</span><span class="n">METH_CLASS</span><span class="p">,</span> <span class="s">&quot;See PEP 585&quot;</span><span class="p">}</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The data model method <a class="reference internal" href="../reference/datamodel.html#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a>.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.9.</span></p>
+</div>
+</dd></dl>
+
+<dl class="var">
+<dt id="c.Py_GenericAliasType">
+<a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject">PyTypeObject</a> <code class="sig-name descname">Py_GenericAliasType</code><a class="headerlink" href="#c.Py_GenericAliasType" title="Permalink to this definition">¶</a></dt>
+<dd><p>The C type of the object returned by <a class="reference internal" href="#c.Py_GenericAlias" title="Py_GenericAlias"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_GenericAlias()</span></code></a>. Equivalent to
+<a class="reference internal" href="../library/types.html#types.GenericAlias" title="types.GenericAlias"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.GenericAlias</span></code></a> in Python.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.9.</span></p>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="datetime.html"
+                        title="previous chapter">DateTime Objects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="init.html"
+                        title="next chapter">Initialization, Finalization, and Threads</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">Report a Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/3.9/Doc/c-api/typehints.rst"
+            rel="nofollow">Show Source
+        </a>
+      </li>
+    </ul>
+  </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="init.html" title="Initialization, Finalization, and Threads"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="datetime.html" title="DateTime Objects"
+             >previous</a> |</li>
+
+    <li><img src="../_static/py.png" alt=""
+             style="vertical-align: middle; margin-top: -1px"/></li>
+    <li><a href="https://www.python.org/">Python</a> &#187;</li>
+    
+
+    <li>
+      <a href="../index.html">3.9.7 Documentation</a> &#187;
+    </li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Python/C API Reference Manual</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="concrete.html" >Concrete Objects Layer</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2001-2021, Python Software Foundation.
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    Last updated on Sep 02, 2021.
+    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+
+  </body>
+</html>
